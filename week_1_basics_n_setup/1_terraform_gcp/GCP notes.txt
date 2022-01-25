@@ -1,8 +1,16 @@
 https://cloud.google.com/compute/docs/connect/create-ssh-keys
-Need to create .ssh forder under user folder
+Need to create .ssh folder under user folder
 GCP->Compute Engine->Metadata->ssh-keys->Add key
 GCP->Compute Engine->VM instances->Create instance
   Ubuntu 20.14LTS 30GB
+
+Store the keys under User/.../.ssh
+create the config file:
+
+Host de-zoomcamp (name of the host/vm)
+  Hostname 35.240.98.123 (external ip)
+  User marcos
+  IdentityFile c:/Users/Marcos/.ssh/gcp
 
 Git bash
   ssh -i /.ssh/gcp marcos@externalipofmachine
@@ -54,8 +62,8 @@ Ctrl+x
 source .bashrc to relogin
 which docker-compose to test or docker-compose version
 
-
 Clone repo in vm instance
+
 git clone https://github.com/DataTalksClub/data-engineering-zoomcamp.git
 By running docker-compose up -d will run the yaml file to run postgresql and pgadmin in detached mode
 
