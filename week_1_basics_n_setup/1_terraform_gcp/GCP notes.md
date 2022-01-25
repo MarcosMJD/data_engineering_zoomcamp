@@ -1,16 +1,25 @@
+## SSH Keys creation
+
 https://cloud.google.com/compute/docs/connect/create-ssh-keys
 Need to create .ssh folder under user folder
 GCP->Compute Engine->Metadata->ssh-keys->Add key
+
+## VM instance creation
 GCP->Compute Engine->VM instances->Create instance
   Ubuntu 20.14LTS 30GB
 
 Store the keys under User/.../.ssh
+i.e. gcp file is the private key
+
+## Config file creation for SSH connection
 create the config file:
 
 Host de-zoomcamp (name of the host/vm)
   Hostname 35.240.98.123 (external ip)
   User marcos
   IdentityFile c:/Users/Marcos/.ssh/gcp
+
+## Remote access to VM instance
 
 Git bash
   ssh -i /.ssh/gcp marcos@externalipofmachine
@@ -28,14 +37,16 @@ Git bash
   minikube 1.24.0
   skaffold 1.35.1
 
-Download Anaconda for Linux in the vm instance
-  wget https://repo.anaconda.com/archive/Anaconda3-2021.11-Linux-x86_64.sh
-bash Anaconda-3...
-After installation choose yes to initialize Anaconda (adds in .bashrc some stuff to be executed each time user is logged in)
-CTRL+D to logout
-After log in, base env is already activated.
+## Download Anaconda for Linux in the vm instance
 
-Install docker in vm instance
+  wget https://repo.anaconda.com/archive/Anaconda3-2021.11-Linux-x86_64.sh
+  bash Anaconda-3...
+  After installation choose yes to initialize Anaconda (adds in .bashrc some stuff to be executed each time user is logged in)
+  CTRL+D to logout
+  After log in, base env is already activated.
+
+## Install docker in vm instance
+
 sudo apt-get update (to fetch the list of packages)
 sudo apt-get install docker.io
 Setup docker to be run without sudo
@@ -45,7 +56,8 @@ Setup docker to be run without sudo
   Relog user
   Test with docker run hello-world
 
-Install docker compose in vm instance
+## Install docker compose in vm instance
+
 https://github.com/docker/compose/releases
 https://github.com/docker/compose/releases/download/v2.2.3/docker-compose-linux-x86_64
 mkdir bin
@@ -62,12 +74,14 @@ Ctrl+x
 source .bashrc to relogin
 which docker-compose to test or docker-compose version
 
-Clone repo in vm instance
+## Clone repo in vm instance
 
 git clone https://github.com/DataTalksClub/data-engineering-zoomcamp.git
+
 By running docker-compose up -d will run the yaml file to run postgresql and pgadmin in detached mode
 
-Install pgcli
+## Install pgcli
+
 Pip install pgcli
 pgcli -h localhost -U root
 \dt to check
@@ -77,7 +91,8 @@ pip uninstall pgcli
 conda install -c conda-forge pgcli
 pip install -U mycli
 
-Setup VSC to use the VM machine
+## Setup VSC in local machine to use the VM machine
+
 Install Remote-SSH extension in VSC
 Click on green button in left-bottom corner. Connect to host. de-zoomcamp is listed because config file is opened.
 
@@ -89,7 +104,8 @@ Then open a terminal and run pgcli.exe -h localhost -U root -d ny_taxi
 (stop any local instance of postgresql before)
 Note error is shown but works
 
-Run jupiternote in remote machine to execute the ingestion notebook to load data into database
+## Run jupyternote in remote machine to execute the ingestion notebook to load data into database
+
 Note: Close any local instance of jupyter
 In remote terminal (the one in VSC) execute: jupiter notebook
 Auto port forwarding is done
@@ -98,7 +114,8 @@ Download the datafile with wget
 Run the jupyter script
 Note !wget https://s3.amazonaws.com/nyc-tlc/misc/taxi+_zone_lookup.csv :  ! to execute commands
 
-Install Terraform
+## Install Terraform
+
 We will not use the package manager, but download the binary to the /bin directory
 wget https://releases.hashicorp.com/terraform/1.1.4/terraform_1.1.4_linux_amd64.zip
 cd /bin
