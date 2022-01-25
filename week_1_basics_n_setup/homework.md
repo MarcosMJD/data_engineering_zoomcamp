@@ -396,7 +396,7 @@ Use the pick up time for your calculations.
 
 Enter the zone name (not id). If the zone name is unknown (missing), write "Unknown" 
 
-````
+```
 SELECT
 	CAST (t.tpep_pickup_datetime AS DATE) AS day,
 	zdo."Zone" AS destination,
