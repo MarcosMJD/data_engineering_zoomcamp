@@ -9,11 +9,12 @@ Install Google Cloud SDK. What's the version you have?
 
 To get the version, run `gcloud --version`
 
+```
 Google Cloud SDK 369.0.0
 bq 2.0.72
 core 2022.01.14
 gsutil 5.6
-
+```
 
 ## Google Cloud account 
 
@@ -34,6 +35,7 @@ Apply the plan and copy the output (after running `apply`) to the form.
 
 It should be the entire output - from the moment you typed `terraform init` to the very end.
 
+```
 terraform init
 
 Initializing the backend...
@@ -66,7 +68,7 @@ terraform plan
 var.project
   Your GCP Project ID
 
-  Enter a value: ny-taxi  
+  Enter a value: dtc-ne  
 
 
 Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
@@ -133,6 +135,7 @@ Terraform will perform the following actions:
 Plan: 2 to add, 0 to change, 0 to destroy.
 
 terraform apply
+
 var.project
   Your GCP Project ID
 
@@ -215,7 +218,9 @@ google_bigquery_dataset.dataset: Creation complete after 1s [id=projects/dtc-ne/
 
 Apply complete! Resources: 2 added, 0 changed, 0 destroyed.
 
+
 terraform destroy
+
 var.project
   Your GCP Project ID
 
@@ -311,7 +316,7 @@ google_storage_bucket.data-lake-bucket: Destruction complete after 0s
 google_bigquery_dataset.dataset: Destruction complete after 1s
 
 Destroy complete! Resources: 2 destroyed.
-
+```
 
 ## Prepare Postgres 
 
@@ -337,15 +342,17 @@ How many taxi trips were there on January 15?
 
 Consider only trips that started on January 15.
 
+```
 SELECT
 	CAST(tpep_pickup_datetime AS DATE) AS start_day,
 	COUNT(1)
 FROM
 	yellow_taxi_data
-GROUP BY start_day
-ORDER BY start_day DESC
+WHERE CAST(tpep_pickup_datetime AS DATE) = '2021-1-15'
+GROUP BY start_day;
+```
 
-"2021-01-15"	53024
+`"2021-01-15"	53024`
 
 ## Question 4. Largest tip for each day
 
@@ -356,6 +363,7 @@ Use the pick up time for your calculations.
 
 (note: it's not a typo, it's "tip", not "trip")
 
+```
 SELECT
 	CAST(tpep_pickup_datetime AS DATE) AS start_day,
 	COUNT(1),
@@ -363,17 +371,21 @@ SELECT
 FROM
 	yellow_taxi_data
 GROUP BY start_day
-ORDER BY max_tip DESC;
+ORDER BY max_tip DESC
+LIMIT 1;
+```
 
-"2021-01-20"	49437	1140.44
+`"2021-01-20"	49437	1140.44`
 
-Check with 
+```
+Check with
 SELECT
 	CAST(tpep_pickup_datetime AS DATE) AS start_day,
 	tip_amount
 FROM yellow_taxi_data WHERE CAST(tpep_pickup_datetime AS DATE) = '2021-01-20'
 ORDER BY tip_amount DESC;
--- WHERE needs CAST etc, start_day will not work.
+-- WHERE needs CAST etc, start_day will not work because it is not evaluated yet.
+```
 
 ## Question 5. Most popular destination
 
@@ -384,11 +396,11 @@ Use the pick up time for your calculations.
 
 Enter the zone name (not id). If the zone name is unknown (missing), write "Unknown" 
 
+````
 SELECT
 	CAST (t.tpep_pickup_datetime AS DATE) AS day,
 	zdo."Zone" AS destination,
-	zpu."Zone" AS origin,
-	COUNT(2) as total
+	COUNT(zdo."Zone") as total
 FROM
 	yellow_taxi_data t,
 	zones zpu,
@@ -396,12 +408,14 @@ FROM
 WHERE 
 	t."PULocationID" = zpu."LocationID" AND
 	t."DOLocationID" = zdo."LocationID" AND
-	CAST(t.tpep_pickup_datetime AS DATE) = '2021-01-14' 
+	CAST(t.tpep_pickup_datetime AS DATE) = '2021-01-14' AND
+	zpu."Zone" = 'Central Park'
+GROUP BY CAST (t.tpep_pickup_datetime AS DATE), destination
+ORDER BY total DESC
+LIMIT 1;
+```
 
-GROUP BY CAST (t.tpep_pickup_datetime AS DATE), zdo."Zone", zpu."Zone"
-ORDER BY origin DESC
-
-"2021-01-14"	"Upper East Side South"	"Central Park"	97
+`"2021-01-14"	"Upper East Side South"	97`
 
 ## Question 6. Most expensive locations
 
@@ -416,10 +430,10 @@ For example:
 
 If any of the zone names are unknown (missing), write "Unknown". For example, "Unknown / Clinton East". 
 
+```
 SELECT
-	zdo."Zone" AS destination,
-	zpu."Zone" AS origin,
-	AVG(t.total_amount) as average
+	CONCAT ( COALESCE(zpu."Zone", 'Unknown'), ' / ', COALESCE(zdo."Zone", 'Unknown')) as trip,
+	AVG(t.total_amount) AS average
 FROM
 	yellow_taxi_data t,
 	zones zpu,
@@ -429,9 +443,9 @@ WHERE
 	t."DOLocationID" = zdo."LocationID" 
 GROUP BY zdo."Zone", zpu."Zone"
 ORDER BY average DESC
+```
 
-"Alphabet City"	2292.4
-
+`"Alphabet City / Unknown"	2292.4`
 
 ## Submitting the solutions
 
