@@ -33,7 +33,7 @@ resource "google_storage_bucket" "data-lake-bucket" {
       type = "Delete"
     }
     condition {
-      age = 30  // days
+      age = 90  // days
     }
   }
 
@@ -48,9 +48,9 @@ resource "google_bigquery_dataset" "dataset" {
   location   = var.region
 }
 
-resource "google_bigquery_table" "table" {
-  dataset_id = google_bigquery_dataset.dataset.dataset_id
-  project = var.project
-  table_id = var.TABLE_NAME
-  deletion_protection=false
-}
+#resource "google_bigquery_table" "table" {
+#  dataset_id = google_bigquery_dataset.dataset.dataset_id
+#  project = var.project
+#  table_id = var.TABLE_NAME
+#  deletion_protection=false
+#}

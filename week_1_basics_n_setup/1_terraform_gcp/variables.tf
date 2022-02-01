@@ -3,6 +3,7 @@ locals {
 }
 
 variable "project" {
+  default = "dtc-gcp-339512"
   description = "Your GCP Project ID"
 }
 
@@ -23,8 +24,8 @@ variable "BQ_DATASET" {
   default = "trips_data_all"
 }
 
-variable "TABLE_NAME" {
-  description = "BigQuery Table"
-  type  = string
-  default = "ny_trips"
-}
+#variable "TABLE_NAME" {
+#  description = "BigQuery Table"
+#  type  = string
+#  default = "ny_trips"
+#}

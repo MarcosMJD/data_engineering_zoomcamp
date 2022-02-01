@@ -1,23 +1,30 @@
 ## SSH Keys creation
 
 https://cloud.google.com/compute/docs/connect/create-ssh-keys
+https://cloud.google.com/compute/docs/connect/create-ssh-keys#linux-and-macos
+Use gitbash to run the command
+`ssh-keygen -t rsa -f ~/.ssh/KEY_FILENAME -C USER -b 2048`
 Need to create .ssh folder under user folder
-GCP->Compute Engine->Metadata->ssh-keys->Add key
+`GCP->Compute Engine->Metadata->ssh-keys->Add key`
+Add the public key
 
 ## VM instance creation
-GCP->Compute Engine->VM instances->Create instance
-  Ubuntu 20.14LTS 30GB
+`GCP->Compute Engine->VM instances->Create instance`
+` Ubuntu 20.14LTS 30GB`
 
 Store the keys under User/.../.ssh
 i.e. gcp file is the private key
 
 ## Config file creation for SSH connection
-create the config file:
+
+Create the config file:
 
 Host de-zoomcamp (name of the host/vm)
+```
   Hostname 35.240.98.123 (external ip)
   User marcos
   IdentityFile c:/Users/Marcos/.ssh/gcp
+```
 
 ## Remote access to VM instance
 
