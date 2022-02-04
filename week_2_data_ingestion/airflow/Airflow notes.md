@@ -213,7 +213,18 @@ To test xcom, it is needed to add         provide_context=True, when creating th
 Then the functions called will have def upload_to_gcs(bucket, object_name, **kwargs):
 From kwargs we get the "ti" parameter, the task object from to call xcom to send the messages or get them
 
+Dag auto discover 
 
+This is how the default Airflow setup is configured. If you go into your webserver container, something like docker exec -it dtc-de_webserver_1 bash
+and then look into the contents of
+airflow.cfg file, you’ll find the below block somewhere:
+# Number of seconds after which a DAG file is parsed. The DAG file is parsed every
+# ``min_file_process_interval`` number of seconds. Updates to DAGs are reflected after
+# this interval. Keeping this number low will increase CPU usage.
+min_file_process_interval = 30
+
+# How often (in seconds) to scan the DAGs directory for new files. Default to 5 minutes.
+dag_dir_list_interval = 300
 
 
 

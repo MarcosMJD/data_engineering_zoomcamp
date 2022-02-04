@@ -23,7 +23,9 @@ Sercice account authorize applications to perform authotisez API calls. They are
     No need to add multiple users (I gess that are users within the organization with a GCP account (Google Workspace Domain?))
     Actions -> Manage Keys -> Create new keys, copy the url (actually download the json)
     Save the json in a safe directory...i.e. .. .\gcp\...json
-    set GOOGLE_APPLICATION_CREDENTIALS=C:\Users\MARCOS\.google\credentials\dtc-ne-5b655c8dee4a.json
+    set GOOGLE_APPLICATION_CREDENTIALS=C:\Users\MARCOS\.google\credentials\dtc-gcp-339512-63273b55c646.json
+    Use "C:\..." if using gut-bash
+    
     Run to authenticate the application accessing google cloud service account (i.e. GCP SDK)
     gcloud auth application-default login
       Do the oauth stuff
@@ -61,7 +63,7 @@ terraform init
   Gets plugins (for GCP provider) and sets tf status file
 terraform plan
   Important: Use git bash. Command with set env variable does not find the file
-  export GOOGLE_APPLICATION_CREDENTIALS="c:/Users/Marcos/.google/credentials/dtc-ne-5b655c8dee4a.json
+  export GOOGLE_APPLICATION_CREDENTIALS="c:/Users/Marcos/.google/credentials/dtc-ne-5b655c8dee4a.json"
   ./terraform.exe plan
 
   "plan" command compares the status with the config files to see the changes to be applied
@@ -82,4 +84,31 @@ terraform destroy
 After destroy the state file still has the latest configuration, so running again will setup the environment (I guess that storage is deleted with destroy)
 
 
+Transfer service from AWS
 
+"... manage your IAM policy for Cloud Storage Bucket"
+google_storage_bucket_iam_member: Non-authoritative. Updates the IAM policy to grant a role to a new member. Other members for the role for the bucket are preserved.
+
+resource "google_storage_bucket_iam_member" "transfer-service-terraform-iam" {
+  bucket     = google_storage_bucket.transfer-service-terraform.name
+  role       = "roles/storage.admin"
+  member     = "serviceAccount:${data.google_storage_transfer_project_service_account.default.email}"
+  depends_on = [google_storage_bucket.transfer-service-terraform]
+}
+
+Check comments on transfer_service.tf
+Create aws.tfvars in ./aws and store the keys values there. Add the declaration of variables in variables.tf. Also use when running terraform with 
+./terraform.exe apply -var-file c:/Users/Marcos/.aws/aws.tfvars
+
+https://www.terraform.io/language/configuration-0-11/variables
+Note that also vars can be passed through cli with TF_VAR_xxxx = yyyy Then xxxx is the var to be used in config files.
+Note that this is done at root module level.
+
+Needed transfer-service api and cloud resource manager api
+Also service account needs to have role Storage Transfer Admin to create the job
+
+For some reason, bucket given name can not be equal to bucket name. This worked
+resource "google_storage_bucket" "s3-backup-bucket" {
+  name          = "s3-backup-bucket-name"...
+
+  If I change the name of the bucket, terraform will delete it and will create a new one, new iam, etc...

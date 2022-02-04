@@ -50,3 +50,7 @@ docker run -it --network=pg-network taxi_ingest:v001 --user=root --password=root
 ## -d is detached mode to continue with terminal
 docker-compose up -d
 
+#Note to clear containers and caches:
+docker-compose down --volumes --rmi all
+or also 
+docker-compose down -v --rmi all --remove-orphans

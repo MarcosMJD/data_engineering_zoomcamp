@@ -29,3 +29,6 @@ variable "BQ_DATASET" {
 #  type  = string
 #  default = "ny_trips"
 #}
+
+variable "access_key_id" {}
+variable "aws_secret_key" {}
