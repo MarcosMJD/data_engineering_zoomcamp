@@ -3,7 +3,8 @@
 /week_1_basics_n_setup/1_terraform_gcp/terraform.exe
 /week_1_basics_n_setup/1_terraform_gcp/terraform.tfstate
 /week_1_basics_n_setup/1_terraform_gcp/terraform.tfstate.backup
-/week_1_basics_n_setup/1_terraform_gcp/.terraform/providers/registry.terraform.io/hashicorp/google/4.8.0/windows_amd64/terraform-provider-google_v4.8.0_x5.exe
+/week_1_basics_n_setup/1_terraform_gcp/.terraform/
+/week_1_basics_n_setup/1_terraform_gcp/.terraform.lock.hcl
 /week_2_data_ingestion/airflow/data/
 /week_2_data_ingestion/airflow/logs/
 /workspace.code-workspace
