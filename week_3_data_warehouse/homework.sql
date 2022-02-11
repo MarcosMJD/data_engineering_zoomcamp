@@ -171,7 +171,7 @@ PARTITION BY RANGE_BUCKET(SR_Flag, GENERATE_ARRAY(1, 43, 1))
 CLUSTER BY dispatching_base_num AS 
 SELECT * FROM `trips_data_all.external_fhv_tripdata`;
 
-CREATE OR REPLACE TABLE `trips_data_all.fhv_tripdata_partitioned_clustered_by_ba_and_flag`
+CREATE OR REPLACE TABLE `trips_data_all.fhv_tripdata_clustered_by_ba_and_flag`
 CLUSTER BY SR_Flag, dispatching_base_num AS 
 SELECT * FROM `trips_data_all.external_fhv_tripdata`;
 
@@ -179,7 +179,7 @@ SELECT COUNT(dispatching_base_num) FROM `trips_data_all.fhv_tripdata_partitioned
 WHERE SR_Flag = 1 AND dispatching_base_num IN ('B00987', 'B02060', 'B02279', 'B02510');
 -- Query complete (0.2 sec elapsed, 14.3 MB processed)
 
-SELECT COUNT(dispatching_base_num) FROM `trips_data_all.fhv_tripdata_partitioned_clustered_by_ba_and_flag`
+SELECT COUNT(dispatching_base_num) FROM `trips_data_all.fhv_tripdata_clustered_by_ba_and_flag`
 WHERE SR_Flag = 1 AND dispatching_base_num IN ('B00987', 'B02060', 'B02279', 'B02510');
 -- Query complete (0.2 sec elapsed, 55.2 MB processed)
 
