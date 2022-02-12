@@ -8,3 +8,7 @@
 /week_2_data_ingestion/airflow/data/
 /week_2_data_ingestion/airflow/logs/
 /workspace.code-workspace
+/target/
+/dbt_modules/
+/logs/
+/dbt_packages/
