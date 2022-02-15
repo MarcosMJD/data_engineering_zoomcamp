@@ -132,6 +132,7 @@ ORDER BY dispatching_base_num;
 -- Question 4: What is the count, estimated and actual data processed for query which counts trip between 2019/01/01 and 2019/03/31 
 -- for dispatching_base_num B00987, B02060, B02279 *
 -- 
+--Count: 26558, Estimated data processed: 400 MB, Actual data processed: 155 MB
 
 SELECT COUNT(1)
 FROM `dtc-gcp-339512.trips_data_all.fhv_tripdata_partitioned`
