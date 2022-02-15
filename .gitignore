@@ -7,7 +7,8 @@
 /week_1_basics_n_setup/1_terraform_gcp/.terraform.lock.hcl
 /week_2_data_ingestion/airflow/data/
 /week_2_data_ingestion/airflow/logs/
-/workspace.code-workspace
+/week_2_data_ingestion/airflow/dags_homework/__pycache__/
+/workspace.code-workspace 
 /target/
 /dbt_modules/
 /logs/
