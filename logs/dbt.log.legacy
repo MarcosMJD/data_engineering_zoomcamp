@@ -20869,3 +20869,25 @@ on fhv_tripdata.dropoff_locationid = dropoff_zone.locationid
 2022-02-16 12:04:57.780592 (Thread-663): handling status request
 2022-02-16 12:04:57.781579 (Thread-663): 12:04:57  Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'c2bbc56b-f686-4260-9bc4-77c25db48a6b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f2c20473d90>]}
 2022-02-16 12:04:57.782091 (Thread-663): sending response (<Response 1567 bytes [200 OK]>) to 10.0.46.11
+2022-02-16 12:05:02.061561 (Thread-664): 12:05:02  Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+2022-02-16 12:05:02.061803 (Thread-664): 12:05:02  Partial parsing enabled, no changes found, skipping parsing
+2022-02-16 12:05:02.068484 (Thread-664): 12:05:02  Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'c2bbc56b-f686-4260-9bc4-77c25db48a6b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f2c401939d0>]}
+2022-02-16 12:05:02.496444 (Thread-665): handling status request
+2022-02-16 12:05:02.496820 (Thread-665): 12:05:02  Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'c2bbc56b-f686-4260-9bc4-77c25db48a6b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f2c007efe80>]}
+2022-02-16 12:05:02.497300 (Thread-665): sending response (<Response 1244 bytes [200 OK]>) to 10.0.40.53
+2022-02-16 12:05:02.567972 (Thread-666): handling status request
+2022-02-16 12:05:02.568379 (Thread-666): 12:05:02  Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'c2bbc56b-f686-4260-9bc4-77c25db48a6b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f2c206faca0>]}
+2022-02-16 12:05:02.568836 (Thread-666): sending response (<Response 1244 bytes [200 OK]>) to 10.0.25.62
+2022-02-16 12:06:53.912286 (Thread-667): 12:06:53  Partial parsing enabled: 0 files deleted, 0 files added, 1 files changed.
+2022-02-16 12:06:53.913338 (Thread-667): 12:06:53  Partial parsing: updated file: taxi_rides_ny://models/core/dm_monthly_zone_revenue.sql
+2022-02-16 12:06:53.919098 (Thread-667): 12:06:53  1699: static parser successfully parsed core/dm_monthly_zone_revenue.sql
+2022-02-16 12:06:54.006531 (Thread-667): 12:06:54  Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'c2bbc56b-f686-4260-9bc4-77c25db48a6b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f2c00709f70>]}
+2022-02-16 12:06:54.315103 (Thread-668): handling status request
+2022-02-16 12:06:54.315464 (Thread-668): 12:06:54  Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'c2bbc56b-f686-4260-9bc4-77c25db48a6b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f2c205ef160>]}
+2022-02-16 12:06:54.315944 (Thread-668): sending response (<Response 1585 bytes [200 OK]>) to 10.0.35.204
+2022-02-16 12:06:54.463356 (Thread-669): handling status request
+2022-02-16 12:06:54.463713 (Thread-669): 12:06:54  Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'c2bbc56b-f686-4260-9bc4-77c25db48a6b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f2c201010d0>]}
+2022-02-16 12:06:54.464221 (Thread-669): sending response (<Response 1585 bytes [200 OK]>) to 10.0.40.53
+2022-02-16 12:07:03.165549 (Thread-670): handling status request
+2022-02-16 12:07:03.165903 (Thread-670): 12:07:03  Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'c2bbc56b-f686-4260-9bc4-77c25db48a6b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f2c205efbb0>]}
+2022-02-16 12:07:03.166368 (Thread-670): sending response (<Response 1585 bytes [200 OK]>) to 10.0.47.99
