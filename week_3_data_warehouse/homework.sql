@@ -58,10 +58,22 @@ WHERE DATE(pickup_datetime) BETWEEN '2019-01-01' AND '2019-12-31';
 --
 -- Question 3: Best strategy to optimise if query always filter by dropoff_datetime and order by dispatching_base_num *
 -- 
--- Partition by dropoff_datetime <- Even if the partitions are less than 1GB in size
+-- Partition by dropoff_datetime <- Even if the partitions are less than 1GB in size WRONG???? 
 -- Partition by dispatching_base_num
--- Partition by dropoff_datetime and cluster by dispatching_base_num
+-- Partition by dropoff_datetime and cluster by dispatching_base_num <- RIGHT???
 -- Partition by dispatching_base_num and cluster by dropoff_datetime
+
+-- My test indicates just pertitioning. And accorging to google...
+-- Use clustering under the following circumstances:
+-- You don't need strict cost guarantees before running the query.
+-- You need more granularity than partitioning alone allows. To get clustering benefits in addition to partitioning benefits, you can use the same column for both partitioning and clustering.
+-- Your queries commonly use filters or aggregation against multiple particular columns.
+-- The cardinality of the number of values in a column or group of columns is large.
+
+-- So no filtering by the column dispatching (just ordering).
+
+
+
 
 -- Get number of unique dispatching_base_num: 880
 SELECT COUNT(DISTINCT (dispatching_base_num)) FROM trips_data_all.external_fhv_tripdata;
@@ -191,7 +203,10 @@ WHERE SR_Flag = 1 AND dispatching_base_num IN ('B00987', 'B02060', 'B02279', 'B0
 -- Can be worse due to metadata <=
 -- Huge improvement in data processed
 -- Huge improvement in query performance
-
+--
+-- From Google: You might not see a significant difference in query performance between a clustered and unclustered table if the table or partition is under 1 GB.
+-- Prefer clustering over partitioning under the following circumstances: Partitioning results in a small amount of data per partition (approximately less than 1 GB).
+-- ... others
 --
 -- Question 7: In which format does BigQuery save data
 -- 
