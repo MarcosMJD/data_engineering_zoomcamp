@@ -1,4 +1,4 @@
-
+/dbt_modules/
 target/
 dbt_packages/
 logs/

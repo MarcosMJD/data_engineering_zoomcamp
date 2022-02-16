@@ -9,7 +9,3 @@
 /week_2_data_ingestion/airflow/logs/
 /week_2_data_ingestion/airflow/dags_homework/__pycache__/
 /workspace.code-workspace 
-/target/
-/dbt_modules/
-/logs/
-/dbt_packages/
