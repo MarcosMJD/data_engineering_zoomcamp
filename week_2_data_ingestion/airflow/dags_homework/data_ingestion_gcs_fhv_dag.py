@@ -76,6 +76,12 @@ with DAG(
         bash_command=f"curl -sS {dataset_url} > {csv_path}"
     )
 
+    # Delete \n not preceded by \r
+    clear_wrong_cr = BashOperator(
+        task_id="clear_wrong_cr",
+        bash_command=f"perl -i -pe 's/(?<!\r)\n/\1/g' {csv_path}"
+    )
+
     format_to_parquet_task = PythonOperator(
         task_id="format_to_parquet_task",
         python_callable=format_to_parquet,
