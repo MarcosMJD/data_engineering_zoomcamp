@@ -1,0 +1,22 @@
+FROM python:3.8-slim
+
+# Set bin/bash instead of default's ["/bin/sh", "-c"]
+# -o pipefail	pipe failure	Causes a pipeline to return the exit status of the last command in the pipe that returned a non-zero return value.
+# -e	errexit	Abort script at first error, when a command exits with non-zero status (except in until or while loops, if-tests, list constructs)
+# -u	nounset	Attempt to use undefined variable outputs error message, and forces an exit
+# -v	verbose	Print each command to stdout before executing it
+# -x	xtrace	Similar to -v, but expands commands
+# -c ...	(none)	Read commands from ..
+SHELL ["/bin/bash", "-o", "pipefail", "-e", "-u", "-x", "-c"]
+
+# COPY, RUN AND ENTRYPOINT commands will use this path
+WORKDIR /script
+
+COPY requirements_advanced.txt .
+
+RUN pip install --no-cache-dir -r requirements_advanced.txt
+
+COPY main_advanced.py .
+
+ENTRYPOINT [ "python", "main_advanced.py" ]
+
