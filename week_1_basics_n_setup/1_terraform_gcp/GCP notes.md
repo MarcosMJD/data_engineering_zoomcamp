@@ -9,6 +9,7 @@ Need to create .ssh folder under user folder
 Add the public key
 
 ## VM instance creation
+
 `GCP->Compute Engine->VM instances->Create instance`
 ` Ubuntu 20.14LTS 30GB`
 

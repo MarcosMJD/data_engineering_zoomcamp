@@ -1,4 +1,3 @@
-from turtle import clear
 from kafka import KafkaConsumer, KafkaProducer
 from json import loads, dumps
 from time import sleep

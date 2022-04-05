@@ -25,11 +25,12 @@ Set env variables for the yaml file
 AIRFLOW_UID tells which user so that related files under those dirs will be created by the user and not the root user. Note: User group shall be set to 0.
 So by doing this, user and group ids in these directories and the folders in the containers.
 
-In bash:
+In bash: 
 echo -e "AIRFLOW_UID=$(id -u)" > .env
   AIRFLOW_UID=197610
 
 Note: running id ->  uid=197610(MARCOS) gid=197121 groups=197121
+Note -e is enable backslash
 
 In  Windows command shell just MARCOS?
 Is it needed to set group id to 0 in Windows, seems to do not need... check yaml file, initialization section:
