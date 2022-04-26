@@ -132,7 +132,6 @@ unzip terraform_1.1.4_linux_amd64.zip
 terraform -version
 
 
-Todo: Setup Google Cloud SDK
 
 
 
